@@ -1,0 +1,30 @@
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+    <session-factory>
+        <!--Драйвер к Postgres-->
+        <property name="connection.driver_class">org.postgresql.Driver</property>
+        <property name="connection.url">jdbc:postgresql://localhost:5432/postgres</property>
+        <property name="connection.username">postgres</property>
+        <property name="connection.password">admin</property>
+        <property name="connection.pool_size">8</property>
+        <property name="dialect">org.hibernate.dialect.PostgreSQL94Dialect</property>
+        <!--показывает запросы, которые мы выполняем, мы будем видеть их в консоли-->
+        <property name="show_sql">true</property>
+        <!--сессия живёт внутри треда, два разных треда будут иметь разные сессии-->
+        <property name="current_session_context_class">thread</property>
+
+        <!--Не выполняем никаких действий при запуске-->
+        <property name="hibernate.hbm2ddl.auto">none</property>
+
+        <!--<property name="hibernate.connection.isolation">4</property>-->
+
+        <!--"mapping class" означает, что в коде есть класс, который нужно мапить из джавы в базу данных-->
+        <mapping class="com.geekbrains.hibernate.advanced.Product"/>
+        <mapping class="com.geekbrains.hibernate.advanced.Customer"/>
+        <mapping class="com.geekbrains.hibernate.advanced.Manufacturer"/>
+        <mapping class="com.geekbrains.hibernate.advanced.BigItem"/>
+    </session-factory>
+</hibernate-configuration>
