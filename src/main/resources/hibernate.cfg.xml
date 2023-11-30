@@ -22,9 +22,10 @@
         <!--<property name="hibernate.connection.isolation">4</property>-->
 
         <!--"mapping class" означает, что в коде есть класс, который нужно мапить из джавы в базу данных-->
-        <mapping class="com.geekbrains.hibernate.advanced.Product"/>
-        <mapping class="com.geekbrains.hibernate.advanced.Customer"/>
-        <mapping class="com.geekbrains.hibernate.advanced.Manufacturer"/>
-        <mapping class="com.geekbrains.hibernate.advanced.BigItem"/>
+        <mapping class="ru.shipova.hibernate.lesson_3.homework.Product"/>
+        <mapping class="ru.shipova.hibernate.lesson_3.homework.Customer"/>
+        <mapping class="ru.shipova.hibernate.lesson_3.Book"/>
+        <mapping class="ru.shipova.hibernate.lesson_3.Author"/>
+        <mapping class="ru.shipova.hibernate.lesson_3.Reader"/>
     </session-factory>
 </hibernate-configuration>
