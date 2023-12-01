@@ -1,8 +1,15 @@
 package ru.shipova.hibernate.one_to_one;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
+@Setter
+@Getter
+@NoArgsConstructor
 @Entity
 @Table(name = "employees")
 public class Employee implements Serializable {
@@ -17,31 +24,8 @@ public class Employee implements Serializable {
     private String name;
 
     @OneToOne
-    @JoinColumn(name = "details_id")
-    private EmployeeDetails details;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public EmployeeDetails getDetails() {
-        return details;
-    }
-
-    public void setDetails(EmployeeDetails details) {
-        this.details = details;
-    }
-
-    public Employee() {
-    }
+    @JoinColumn(name = "details_id")//"details_id" - столбец в таблице employees
+    private EmployeeDetails details;//будет хранить не число, а объект, на который он ссылается
 
     @Override
     public String toString() {

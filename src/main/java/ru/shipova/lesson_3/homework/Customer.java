@@ -1,4 +1,4 @@
-package ru.shipova.hibernate.lesson_3.homework;
+package ru.shipova.lesson_3.homework;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,6 +12,10 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name = "customers")
+@NamedQueries({
+        @NamedQuery(name = "Customer.findAll", query = "SELECT c FROM Customer c"),
+        @NamedQuery(name = "Customer.findById", query = "SELECT c FROM Customer c WHERE c.id = :id")
+                })
 public class Customer {
     @Id
     //IDENTITY указывает, что значение id необходимо получать непосредственно из столбца «id» таблицы,

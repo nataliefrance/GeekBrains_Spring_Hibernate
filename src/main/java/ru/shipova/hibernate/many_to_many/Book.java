@@ -1,9 +1,16 @@
 package ru.shipova.hibernate.many_to_many;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
+@Setter
+@Getter
+@NoArgsConstructor
 @Entity
 @Table(name = "books")
 public class Book implements Serializable {
@@ -19,38 +26,11 @@ public class Book implements Serializable {
 
     @ManyToMany
     @JoinTable(
-            name = "books_readers",
+            name = "books_readers", //отдельная таблица в БД
             joinColumns = @JoinColumn(name = "book_id"),
             inverseJoinColumns = @JoinColumn(name = "reader_id")
     )
     private List<Reader> readers;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public List<Reader> getReaders() {
-        return readers;
-    }
-
-    public void setReaders(List<Reader> readers) {
-        this.readers = readers;
-    }
-
-    public Book() {
-    }
 
     @Override
     public String toString() {

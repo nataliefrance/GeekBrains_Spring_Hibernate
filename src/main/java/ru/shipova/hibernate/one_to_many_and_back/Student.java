@@ -1,9 +1,16 @@
 package ru.shipova.hibernate.one_to_many_and_back;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
+@Setter
+@Getter
 @Entity
+@NoArgsConstructor
 @Table(name = "students")
 public class Student implements Serializable {
     private static final long serialVersionUID = -8181750949221177838L;
@@ -17,35 +24,8 @@ public class Student implements Serializable {
     private String name;
 
     @ManyToOne
-    @JoinColumn(name = "university_id")
+    @JoinColumn(name = "university_id") //Внешний ключ, по которому идёт привязка к University
     private University university;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public University getUniversity() {
-        return university;
-    }
-
-    public void setUniversity(University university) {
-        this.university = university;
-    }
-
-    public Student() {
-    }
 
     @Override
     public String toString() {

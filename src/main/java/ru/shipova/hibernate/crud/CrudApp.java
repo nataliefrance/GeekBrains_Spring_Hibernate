@@ -21,9 +21,9 @@ public class CrudApp {
             session = factory.getCurrentSession();
             session.beginTransaction();
             SimpleItem newSimpleItem = new SimpleItem("Chair", 1000);
-            System.out.println("Before save: " + newSimpleItem);
+            System.out.println("Before save: " + newSimpleItem); //id = null
             session.save(newSimpleItem);
-            System.out.println("After save: " + newSimpleItem);
+            System.out.println("After save: " + newSimpleItem); //появится idб который будет сохранён в БД
             session.getTransaction().commit();
             System.out.println("After save and commit: " + newSimpleItem);
 
@@ -34,6 +34,7 @@ public class CrudApp {
             System.out.println(simpleItemFromDb);
             session.getTransaction().commit();
 
+            //ищем самый последний объект, добавленный в базу, поэтому ищем simple_item  с максимальным id
             System.out.println("============\n== UPDATE ==\n============");
             session = factory.getCurrentSession();
             session.beginTransaction();

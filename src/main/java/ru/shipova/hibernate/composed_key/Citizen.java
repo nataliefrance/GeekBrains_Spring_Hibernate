@@ -1,8 +1,15 @@
 package ru.shipova.hibernate.composed_key;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
+@Setter
+@Getter
+@NoArgsConstructor
 @Entity
 @Table(name = "citizens")
 public class Citizen implements Serializable {
@@ -16,43 +23,19 @@ public class Citizen implements Serializable {
     @Column(name = "name")
     private String name;
 
+    //одному человеку - один паспорт
     @OneToOne
+    //это всё нужно, чтобы добраться до паспорта
     @JoinColumns({
             @JoinColumn(
-                    name = "passport_serial",
+                    name = "passport_serial",//в нашем классе, в таблице "citizens" есть столбец "passport_serial",
+                    // он ссылается на столбец в таблице "passports", который называется "pserial"
                     referencedColumnName = "pserial"),
             @JoinColumn(
-                    name = "passport_number",
-                    referencedColumnName = "pnumber")
+                    name = "passport_number",//первая ссылка на таблицу в "citizens"
+                    referencedColumnName = "pnumber")//вторая ссылка на таблицу в "passports"
     })
     private Passport passport;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Passport getPassport() {
-        return passport;
-    }
-
-    public void setPassport(Passport passport) {
-        this.passport = passport;
-    }
-
-    public Citizen() {
-    }
 
     @Override
     public String toString() {

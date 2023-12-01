@@ -1,4 +1,4 @@
-package ru.shipova.hibernate.lesson_3.homework;
+package ru.shipova.lesson_3.homework;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,6 +15,7 @@ import java.util.List;
 public class Product {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     Long id;
 
@@ -31,4 +32,9 @@ public class Product {
             inverseJoinColumns = @JoinColumn(name = "customer_id")
     )
     List<Customer> customers;
+
+    public Product(String title, Long cost) {
+        this.title = title;
+        this.cost = cost;
+    }
 }

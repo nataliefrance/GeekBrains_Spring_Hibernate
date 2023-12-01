@@ -6,6 +6,7 @@ import java.io.Serializable;
 @Entity
 @Table(name = "simple_items")
 public class SimpleItem implements Serializable {
+    //прописывается не в ручную, а плагином GenerateSerialVersionUI
     private static final long serialVersionUID = -2750973356670718107L;
 
     @Id

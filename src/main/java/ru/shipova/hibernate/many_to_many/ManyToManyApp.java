@@ -17,6 +17,7 @@ public class ManyToManyApp {
         try {
             session = factory.getCurrentSession();
             session.beginTransaction();
+            //Находим читателя по Id
             Reader reader = session.get(Reader.class, 1L);
             System.out.println(reader);
             System.out.println("Books: ");

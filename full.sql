@@ -87,12 +87,23 @@ INSERT INTO items (title, price) VALUES
 ('coca-cola', 69.90);
 
 DROP TABLE IF EXISTS passports CASCADE;
-CREATE TABLE passports (pserial int, pnumber int, registration_address VARCHAR(255), PRIMARY KEY (pserial, pnumber));
+CREATE TABLE passports
+(pserial int,
+pnumber int,
+registration_address VARCHAR(255),
+PRIMARY KEY (pserial, pnumber));
+
 INSERT INTO passports (pserial, pnumber, registration_address) VALUES
 (6080, 965400, 'country.state.city.street');
 
 DROP TABLE IF EXISTS citizens CASCADE;
-CREATE TABLE citizens (id bigserial, name varchar(255), passport_serial int, passport_number int, CONSTRAINT fk_passport FOREIGN KEY (passport_serial, passport_number) REFERENCES passports (pserial, pnumber));
+CREATE TABLE citizens
+(id bigserial,
+name varchar(255),
+passport_serial int,
+passport_number int,
+CONSTRAINT fk_passport FOREIGN KEY (passport_serial, passport_number) REFERENCES passports (pserial, pnumber));
+
 INSERT INTO citizens (name, passport_serial, passport_number) VALUES
 ('Bobby', 6080, 965400);
 
