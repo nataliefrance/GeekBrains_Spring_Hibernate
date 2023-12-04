@@ -8,6 +8,8 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
+        PrepareData.forcePrepareData();
+
         SessionFactory factory = new Configuration()
                 .configure("lesson_3/hibernate.cfg.xml")
                 .buildSessionFactory();
@@ -16,18 +18,14 @@ public class Main {
         try {
             //запрашиваем у Factory сессию для работы с базой
             session = factory.getCurrentSession();
+            session.beginTransaction();
 
             Customer customer = new Customer();
             customer.setName("Angelina Jolie");
-
-            Product product = new Product("cup", 200L);
-            Product product1 = new Product("bottle", 2000L);
+            Product product = new Product("milk", 89L);
             session.beginTransaction();
             session.save(customer);
             session.save(product);
-            session.save(product1);
-
-
 
             List<Customer> customers = session.createNamedQuery("Customer.findAll", Customer.class).getResultList();
             Customer customer1 = session

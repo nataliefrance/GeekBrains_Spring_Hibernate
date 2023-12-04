@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 public class PrepareData {
 
-    private static void forcePrepareData() {
+     static void forcePrepareData() {
         SessionFactory sessionFactory = new Configuration()
                 .configure("lesson_3/hibernate.cfg.xml")
                 .buildSessionFactory();
