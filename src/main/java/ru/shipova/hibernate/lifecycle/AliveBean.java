@@ -1,8 +1,15 @@
 package ru.shipova.hibernate.lifecycle;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
+@Setter
+@Getter
+@NoArgsConstructor
 @Entity
 @Table(name = "alive_beans")
 public class AliveBean implements Serializable {
@@ -16,27 +23,8 @@ public class AliveBean implements Serializable {
     @Column(name = "name")
     private String name;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public AliveBean(String name) {
         this.name = name;
-    }
-
-    public AliveBean() {
     }
 
     @Override

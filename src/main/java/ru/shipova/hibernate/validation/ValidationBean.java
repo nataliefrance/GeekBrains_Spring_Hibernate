@@ -1,5 +1,8 @@
 package ru.shipova.hibernate.validation;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.validator.constraints.Email;
@@ -11,6 +14,9 @@ import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+@Getter
+@Setter
+@NoArgsConstructor
 @Entity
 @Table(name = "validation_beans")
 public class ValidationBean implements Serializable {
@@ -26,72 +32,26 @@ public class ValidationBean implements Serializable {
     private String email;
 
     @Column(name = "priority")
+    //Значение может находиться от 1 до 10, если нет - будет эксепшн
     @Range(min = 1, max = 10)
     private int priority;
 
+    //не должно быть null
     @NotNull
+    //размер должен быть 6 символов (количество элементов в строке)
     @Size(min = 6, max = 6)
     @Column(name = "postal_code")
     private String postalCode;
 
     @Column(name = "created_at")
     @CreationTimestamp
+    //время создания объекта
     private LocalDateTime createdAt;
 
     @Column(name = "updated_at")
+    //время изменения объекта
     @UpdateTimestamp
     private LocalDateTime updatedAt;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public int getPriority() {
-        return priority;
-    }
-
-    public void setPriority(int priority) {
-        this.priority = priority;
-    }
-
-    public String getPostalCode() {
-        return postalCode;
-    }
-
-    public void setPostalCode(String postalCode) {
-        this.postalCode = postalCode;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(LocalDateTime updatedAt) {
-        this.updatedAt = updatedAt;
-    }
-
-    public ValidationBean() {
-    }
 
     @Override
     public String toString() {

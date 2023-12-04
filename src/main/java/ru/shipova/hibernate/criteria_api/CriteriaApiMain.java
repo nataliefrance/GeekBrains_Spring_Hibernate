@@ -31,8 +31,9 @@ public class CriteriaApiMain {
             session.beginTransaction();
             // CriteriaBuilder - построитель выражений, частей запросов, выражений, предикатов и т.д.
             criteriaBuilder = session.getCriteriaBuilder(); // запрос CriteriaBuilder у сессии
+            //Мы хотим сформировать запрос и в результате него получить Item.class
             criteriaQuery = criteriaBuilder.createQuery(Item.class); // построитель запроса, <T> - тип возвращаемых объектов
-            root = criteriaQuery.from(Item.class); // Ссылка на сущность
+            root = criteriaQuery.from(Item.class); // Ссылка на сущность, указываем с какой сущностью мы работаем
             criteriaQuery.select(root);
             query = session.createQuery(criteriaQuery);
             results = query.getResultList();
@@ -44,19 +45,23 @@ public class CriteriaApiMain {
             session = factory.getCurrentSession();
             session.beginTransaction();
             criteriaBuilder = session.getCriteriaBuilder();
-            criteriaQuery = criteriaBuilder.createQuery(Item.class);
-            root = criteriaQuery.from(Item.class);
+            criteriaQuery = criteriaBuilder.createQuery(Item.class); //говорим, что на выходе мы получим Item.class
+            root = criteriaQuery.from(Item.class); //и говорим, что мыработаем с Item.class
 
             BigDecimal minPrice = new BigDecimal(50.0);
             String startsWith = "c";
 
+            //список специальных условий, по которым мы будем выбирать эти item
             List<Predicate> predicates = new ArrayList<>();
             if (minPrice != null) {
+                //поле item.class должено быть больше чем minPrice
                 predicates.add(criteriaBuilder.greaterThan(root.get("price"), minPrice));
             }
             if (startsWith != null) {
+                //делаем предикат, что название должно начинаться со startwith
                 predicates.add(criteriaBuilder.like(root.get("title"), startsWith + "%"));
             }
+            //теперь хотим сделать выборку item с вот таким списком предикатов
             criteriaQuery.select(root).where(predicates.toArray(new Predicate[predicates.size()]));
             query = session.createQuery(criteriaQuery);
             results = query.getResultList();
@@ -88,13 +93,18 @@ public class CriteriaApiMain {
             session.beginTransaction();
             CriteriaBuilder builder = session.getCriteriaBuilder();
 
+            //в качестве результата будет itemDto.class
             CriteriaQuery<ItemDto> criteria = builder.createQuery(ItemDto.class);
+            //в качестве входных данных будет item.class
             root = criteria.from(Item.class);
 
+            //у item запрашиваем ссылку на поле title
             Path<String> titlePath = root.get("title");
             Path<BigDecimal> pricePath = root.get("price");
 
+            //говорим, каким образом мы сформируем iteomDto (в itemDto есть соответствующий конструктор)
             criteria.select(builder.construct(ItemDto.class, titlePath, pricePath));
+            //делаем выборку item у кого стоимость больше 80
             criteria.where(builder.greaterThan(root.get("price"), new BigDecimal(80.0)));
 
             List<ItemDto> dtos = session.createQuery(criteria).getResultList();

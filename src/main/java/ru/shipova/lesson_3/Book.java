@@ -1,4 +1,4 @@
-package ru.shipova.hibernate.lesson_3;
+package ru.shipova.lesson_3;
 
 import javax.persistence.*;
 import java.util.List;

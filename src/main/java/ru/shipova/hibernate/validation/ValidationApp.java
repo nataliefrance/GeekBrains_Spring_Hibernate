@@ -22,19 +22,24 @@ public class ValidationApp {
         try {
             session = factory.getCurrentSession();
             session.beginTransaction();
+
             ValidationBean validationBean = new ValidationBean();
             validationBean.setEmail("hello_world@gmail.com");
             validationBean.setPriority(4);
             validationBean.setPostalCode("123456");
+
             session.save(validationBean);
             session.getTransaction().commit();
+
             System.out.println(validationBean);
             Thread.sleep(5000);
 
             session = factory.getCurrentSession();
             session.beginTransaction();
+
             ValidationBean updatedBean = session.get(ValidationBean.class, 2L);
             updatedBean.setPriority(updatedBean.getPriority() + 1);
+
             session.save(updatedBean);
             session.getTransaction().commit();
             System.out.println(updatedBean);

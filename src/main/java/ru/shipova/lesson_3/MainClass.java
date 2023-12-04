@@ -1,4 +1,4 @@
-package ru.shipova.hibernate.lesson_3;
+package ru.shipova.lesson_3;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -8,7 +8,7 @@ import org.hibernate.cfg.Configuration;
 public class MainClass {
     public static void main(String[] args) {
         SessionFactory factory = new Configuration()
-                .configure("hibernate.cfg.xml")
+                .configure("lesson_3/hibernate.cfg.xml")
                 .addAnnotatedClass(Book.class)
                 .addAnnotatedClass(Author.class)
                 .addAnnotatedClass(Reader.class)

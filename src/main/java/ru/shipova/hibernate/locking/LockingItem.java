@@ -1,10 +1,16 @@
 package ru.shipova.hibernate.locking;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
+@Getter
+@NoArgsConstructor
 @Entity
 @Table(name = "locking_items")
+//Блокировка
 public class LockingItem implements Serializable {
     private static final long serialVersionUID = -1049528515179193867L;
 
@@ -17,29 +23,15 @@ public class LockingItem implements Serializable {
     private int value;
 
     @Version
+    //Для версии существует только геттер
     private Long version;
-
-    public Long getId() {
-        return id;
-    }
 
     public void setId(Long id) {
         this.id = id;
     }
 
-    public int getValue() {
-        return value;
-    }
-
     public void setValue(int value) {
         this.value = value;
-    }
-
-    public Long getVersion() {
-        return version;
-    }
-
-    public LockingItem() {
     }
 
     public LockingItem(int value) {
