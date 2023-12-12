@@ -46,10 +46,16 @@
         <button class="btn btn-primary" type="submit">Save</button>
     </form>
 
-    <form th:action="@{'/products/'}" method="get">
-        <input type="text" name="title" class="form-control">
-        <input type="number" name="price" class="form-control">
-        <button class="btn btn-warning" type="submit">Demo</button>
+<!--    <form th:action="@{'/products/'}" method="get">-->
+<!--        <input type="text" name="title" class="form-control">-->
+<!--        <input type="number" name="price" class="form-control">-->
+<!--        <button class="btn btn-warning" type="submit">Demo</button>-->
+<!--    </form>-->
+
+    <form th:action="@{/products/submit_form}" method="get">
+        <input th:name="minPrice" type="number" placeholder="Minimum price">
+        <input th:name="maxPrice" type="number" placeholder="Maximum price">
+        <button type="submit" class="btn btn-primary">Accept</button>
     </form>
 </div>
 

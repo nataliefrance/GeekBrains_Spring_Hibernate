@@ -21,5 +21,5 @@ public class Product {
     private String title;
 
     @Column(name = "price")
-    private int price;
+    private Integer price;
 }
